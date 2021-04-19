@@ -1,0 +1,178 @@
+#+Title: Super config waw super waw
+
+* Valores por defecto
+** Set some default crap
+#+begin_src emacs-lisp
+  (setq-default
+   delete-by-moving-to-trash t
+   window-combination-resize t
+   x-strech-cursor t)
+
+  (setq undo-limit 80000000 
+        evil-want-fine-undo t
+        auto-save-default t
+        truncate-string-ellipsis "...")
+
+  (global-display-line-numbers-mode 1)
+  (global-visual-line-mode t)
+
+  ;; window default size
+  (add-to-list 'default-frame-alist '(height . 40))
+  (add-to-list 'default-frame-alist '(width . 100))
+#+end_src
+** Remove default crap
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+
+  (setq ring-bell-function 'ignore)
+#+end_src
+
+* El manejador de paquetes
+#+begin_src emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+
+  ;; Instalar use-package
+  (straight-use-package 'use-package)
+  ;; use-package insatalara mediante straight
+  (setq straight-use-package-by-default t)
+#+end_src  
+
+* Los paquetes
+** all-icons
+#+begin_src emacs-lisp
+  (use-package all-the-icons)
+#+end_src
+** Dashboard
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :config
+    (dashboard-setup-startup-hook)
+    (setq dashboard-banner-logo-title "wololo")
+    (setq dashboard-startup-banner 'logo))
+    ;(setq dashboard-startup-banner "c:/Users/jpbri/Pictures/emacs_stuff/banner.txt"))
+#+end_src
+** evil-mode 
+#+begin_src emacs-lisp
+;; evil-mode
+(use-package evil
+:init
+(setq evil-want-integration t)
+(setq evil-want-keybinding nil)
+(setq evil-vsplit-window-right t)
+(setq evil-split-window-below t)
+:hook (after-init . evil-mode))
+
+;; evil-collection
+(use-package evil-collection
+:hook (after-init . evil-collection-init))
+
+#+end_src
+** which-key
+#+begin_src emacs-lisp
+  (use-package which-key
+:init
+    (setq which-key-side-window-location 'bottom))
+  (which-key-mode)
+#+end_src
+
+** TODO org-mode
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  (setq org-directory "~/Org/"
+        org-agenda-files '("~/Org/agenda.org")
+        org-default-notes-file (expand-file-name "notes.org" org-directory))
+
+
+#+end_src
+
+- posibles estados de tareas.
+#+begin_src emacs-lisp
+  (setq org-todo-keywords
+        '((sequence
+           "TODO(t)"         ; Tarea por hacer.
+           "START(s)"        ; Tarea empezada.
+           "WAIT(w)"         ; Tarea en espera de algo.
+           "PROJ(p)"         ; A project tha contains other tasks
+           "|"               ; divide tareas "activas" y "inactivas"
+           "DONE(d)"         ; Tarea lista
+           "CANCELLED(c)"))) ; Tarea cancelada
+
+#+end_src
+
+** doom-themes
+   TODO buscar otro fondo ?
+#+begin_src emacs-lisp
+  (use-package doom-themes)
+  (setq doom-themes-enable-bold t
+	doom-thems-enable-italic t)
+
+  (load-theme 'doom-vibrant t)
+#+end_src
+
+** Projectile
+#+begin_src emacs-lisp
+  (use-package projectile
+    :config
+    (projectile-global-mode 1))
+#+end_src
+** Magit
+#+begin_src emacs-lisp
+  (use-package magit)
+  (use-package magit-todos
+    :config (magit-todos-mode))
+#+end_src
+
+** pdf-tools
+pdf-tools
+#+begin_src emacs-lisp
+  (use-package pdf-tools
+    :mode ("\\.pdf\\'" . pdf-view-mode) 
+    :custom (pdf-tools-handle-upgrades nil)
+    :config (pdf-tools-install))
+
+  ;Para que abra los pdf dentro de emacs
+  (add-to-list 'org-file-apps '("\\.pdf\\'" . emacs))
+  ;Para que los pdfs se abran a la derecha
+  (add-to-list
+   'display-buffer-alist
+   '("\\.pdf$*" (display-buffer-reuse-window display-buffer-in-side-window)
+     (window-width . 0.5)
+     (side . right)))
+#+end_src
+* Languaje Support
+#+begin_src emacs-lisp
+  (use-package markdown-mode)
+  (use-package lua-mode)
+  (use-package python-mode)
+#+end_src
+* Keybindings
+#+begin_src emacs-lisp
+(use-package general
+:config
+(general-evil-setup t))
+#+end_src
+
+** Buffers & Bookmarks
+#+begin_src emacs-lisp
+(nvmap :prefix "SPC"
+"b b" '(ibuffer :which-key "ibuffer"))
+#+end_src
+
+** shells
+#+begin_src emacs-lisp
+(nvmap :prefix "SPC"
+"o e" '(eshell :wich-key "Eshell"))
+#+end_src
