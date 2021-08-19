@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ $1 -gt 0 ] ; then
+if [ $# -gt 0 ] ; then
     session_name=$1
 else
     path_name="$(basename "$PWD" | tr . -)"
