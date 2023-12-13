@@ -1,0 +1,40 @@
+
+### MISC
+
+set-option -g base-index 1
+set-option -g pane-base-index 1
+set-option -g renumber-windows on
+
+# show me the colors
+set-option -g default-terminal "screen-256color"
+
+# me & vim
+set-option -g mode-keys vi
+
+### VISUAL
+
+
+### SHORTCUTS
+
+# C-b sucks!
+unbind C-b
+set-option -g prefix C-q
+bind-key -r C-q send-prefix
+
+# Easy reload
+bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "config reloaded"
+
+# Easy movig
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+# Easy resizing 
+bind-key -r C-h resize-pane -L 3
+bind-key -r C-j resize-pane -D 3
+bind-key -r C-k resize-pane -U 3
+bind-key -r C-l resize-pane -R 3
+
+# Bye bye status bar
+bind-key ´ set -g status
