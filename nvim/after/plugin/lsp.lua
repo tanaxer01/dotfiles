@@ -68,15 +68,14 @@ mason_lspconfig.setup_handlers {
 
 -- [[ Configure nvim-cmp ]]
 local cmp = require "cmp"
---local luasnip = require "luasnip"
+local luasnip = require "luasnip"
 
 cmp.setup {
-    --[[ snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-    --]]
+    snippet = {
+        expand = function(args)
+        luasnip.lsp_expand(args.body)
+        end,
+    },
     completion = {
         completeopt = 'menu,menuone,noinsert',
     },
