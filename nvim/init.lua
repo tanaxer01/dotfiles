@@ -1,5 +1,5 @@
 -- 
--- init.lua
+-- My config
 --
 
 vim.g.mapleader = ","
@@ -20,4 +20,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("meus")
 
-require("lazy").setup("meus.plugins", {})
+require("lazy").setup("meus.plugins", {
+    change_detection = { notify = false },
+})
