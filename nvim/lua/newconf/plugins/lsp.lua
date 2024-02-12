@@ -23,7 +23,7 @@ return {
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-        require("fidget").setup()
+        require("fidget").setup({})
         require("neodev").setup()
         require("mason").setup()
         require("mason-lspconfig").setup({
@@ -37,13 +37,14 @@ return {
                         capabilities = capabilities
                     }
                 end,
+
                 ["lua_ls"] = function ()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
                         settings = {
                             Lua = {
                                 diagnostics = {
-                                    globals = { "vim" }
+                                    globals = { "vim", }
                                 }
                             }
                         }
