@@ -12,7 +12,7 @@ autocmd('LspAttach', {
     group = newconfGroup,
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "gd",           function() vim.lsp.buf.code_action() end, opts)
+        vim.keymap.set("n", "gd",           function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "K",            function() vim.lsp.buf.hover() end, opts)
         vim.keymap.set("n", "<leader>vws",  function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>vd",   function() vim.lsp.buf.open_float() end, opts)
@@ -22,6 +22,9 @@ autocmd('LspAttach', {
         vim.keymap.set("i", "<C-h>",        function() vim.lsp.buf.signature_help() end, opts)
         vim.keymap.set("i", "<[d>",         function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("i", "<]d>",         function() vim.diagnostic.goto_prev() end, opts)
+        vim.api.nvim_buf_create_user_command(e.buf, 'Format', function(_)
+            vim.lsp.buf.format()
+        end, {})
     end
 })
 
