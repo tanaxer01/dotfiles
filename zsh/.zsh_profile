@@ -1,0 +1,21 @@
+
+addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
+VIM="nvim"
+alias vim='nvim'
+alias dc='docker container'
+alias di='docker image'
+
+
+export COLORTERM='truecolor'
+export CC="clang-19"
+export CXX="clang++-19"
+export GOPATH=$HOME/go
+
+addToPathFront $HOME/go/bin
+addToPathFront $HOME/.local/go/bin
+addToPathFront $HOME/.local/bin
