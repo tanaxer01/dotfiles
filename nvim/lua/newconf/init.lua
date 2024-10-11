@@ -61,9 +61,10 @@ autocmd('LspAttach', {
         end, opts)
         vim.keymap.set("n", "<lead>gD", function() -- Go to type definition in a split
             vim.cmd("split")
-            vim.lsp.buf.type_definition()
+            -- vim.lsp.buf.type_definition()
         end, opts)
 
+        --- OLD
         -- vim.keymap.set("n", "gd",           function() vim.lsp.buf.definition() end, opts)
         vim.keymap.set("n", "K",            function() vim.lsp.buf.hover() end, opts)
         -- vim.keymap.set("n", "<leader>vws",  function() vim.lsp.buf.workspace_symbol() end, opts)
