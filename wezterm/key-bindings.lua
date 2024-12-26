@@ -21,6 +21,11 @@ end
 local leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 local keys = {
+	-- Pane
+
+	--
+
+
 	{
 		key = 's',
 		mods = 'LEADER',
@@ -34,6 +39,7 @@ local keys = {
 	{ key = 'p', mods = 'LEADER', action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = 'n', mods = 'LEADER', action = wezterm.action.ActivateTabRelative(1) },
 	{ key = 'z', mods = 'LEADER', action = wezterm.action.TogglePaneZoomState },
+	-- { key = '[', mode = 'LEADER', action = wezterm.action.
 
 	move_pane('h', 'Left'),
 	move_pane('j', 'Down'),
