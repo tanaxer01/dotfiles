@@ -1,0 +1,7 @@
+
+macos-titlebar-style = transparent
+shell-integration = zsh
+theme = vesper
+macos-option-as-alt = true
+
+
